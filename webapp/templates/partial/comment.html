@@ -1,11 +1,4 @@
-{% extends 'base.html' %}
-
-{% block menu %}
-    <li><a href="{% url 'comment_add' %}">Add comments</a></li>
-{% endblock %}
-
-{% block content %}
-            <h1>Comments:</h1>
+<h1>Comments:</h1>
     <hr/>
     {% for comment in comments %}
         <p>{{ comment.author }}</p>
@@ -18,4 +11,3 @@
         </p>
         <hr/>
     {% endfor %}
-{% endblock %}
