@@ -86,7 +86,7 @@ class CommentView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         comment_pk = kwargs.get('pk')
-        context['comments'] = Comment.objects.all()
+        context['comments'] = Comment.objects.all().order_by("-created_at")
         return context
 
 
@@ -141,4 +141,4 @@ class CommentDeleteView(View):
         comment_pk = kwargs.get('pk')
         comment = get_object_or_404(Comment, pk=comment_pk)
         comment.delete()
-        return redirect("comments")
+        return redirect('comments')

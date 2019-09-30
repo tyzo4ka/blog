@@ -5,6 +5,6 @@
     <form method="POST" action="{% url 'comment_delete' comment.pk %}" class="text-center">
         {% csrf_token %}
         <p><input type="submit" value="Confirm"></p>
-        <p><a href="{% url 'comments' comment.pk %}">Cancel</a></p>
+        <p><a href="{% url 'comments' %}">Cancel</a></p>
     </form>
 {% endblock %}
