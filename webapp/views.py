@@ -106,3 +106,26 @@ class CommentCreateView(View):
             return redirect('comments')
         else:
             return render(request, 'comment/create.html', context={'form': form})
+
+
+class CommentUpdateView(View):
+    def get(self, request, *args, **kwargs):
+        comment = get_object_or_404(Comment, pk=kwargs.get('pk'))
+        form = CommentForm(data={
+            'article': comment.article,
+            'author': comment.author,
+            'text': comment.text,
+        })
+        return render(request, 'comment/update.html', context={'form': form, 'comment': comment})
+
+    def post(self, request, *args, **kwargs):
+        comment = get_object_or_404(Comment, pk=kwargs.get('pk'))
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            comment.article = form.cleaned_data['article']
+            comment.author = form.cleaned_data['author']
+            comment.text = form.cleaned_data['text']
+            comment.save()
+            return redirect('comments')
+        else:
+            return render(request, 'comment/update.html', context={'form': form, 'comment':  comment})
